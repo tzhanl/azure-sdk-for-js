@@ -150,7 +150,7 @@ certificate is created.
 ```javascript
 const certificateName = "MyCertificateName";
 const result = await client.createCertificate(certificateName, {
-  issuerParameters: { name: "Self" },
+  issuerParameters: { name: "Self" }, x509CertificateProperties: { subject: "cn=MyCert" }
 });
 ```
 
@@ -163,7 +163,7 @@ Besides the name of the certificate, you can also pass the following attributes:
 ```javascript
 const certificateName = "MyCertificateName";
 const certificatePolicy = {
-  issuerParameters: { name: "Self" }
+  issuerParameters: { name: "Self" }, x509CertificateProperties: { subject: "cn=MyCert" }
 }
 const enabled = true;
 const tags = {
@@ -191,9 +191,9 @@ the certificate's policy.
 
 ```javascript
 const latestCertificate = await client.getCertificateWithPolicy(certificateName);
-console.log(`Latest version of the certificate ${certificateName}: `, getResult);
+console.log(`Latest version of the certificate ${certificateName}: `, latestCertificate.version);
 const specificCertificate = await client.getCertificate(certificateName, latestCertificate.version!);
-console.log(`The certificate ${certificateName} at the version ${latestCertificate.version!}: `, getResult);
+console.log(`The certificate ${certificateName} at the version ${latestCertificate.version!}: `, specificCertificate);
 ```
 
 ### List all versions of a certificate
@@ -224,9 +224,6 @@ The certificate attributes can be updated to an existing certificate version wit
 ```javascript
 const result = client.getCertificateWithPolicy(certificateName);
 await client.updateCertificate(certificateName, result.version, {
-  certificatePolicy: {
-    issuerParameters: { name: "Self" }
-  },
   certificateAttributes: {
     enabled: false
   },
@@ -239,7 +236,6 @@ await client.updateCertificate(certificateName, result.version, {
 The certificate's policy can also be updated individually with `updateCertificatePolicy`, as follows:
 
 ```javascript
-const result = client.getCertificateWithPolicy(certificateName);
 await client.updateCertificatePolicy(certificateName, {
   issuerParameters: { name: "Self" }
 });
