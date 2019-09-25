@@ -268,8 +268,8 @@ for await (let key of client.listKeys()) {
 for await (let deletedKey of client.listDeletedKeys()) {
   console.log("Deleted key: ", deletedKey);
 }
-for await (let key of client.listKeyVersions(keyName)) {
-  console.log("Version: ", key.version);
+for await (let item of client.listKeyVersions(keyName)) {
+  console.log("Version: ", item.version);
 }
 ```
 
@@ -289,8 +289,8 @@ for await (let page of client.listDeletedKeys().byPage()) {
   }
 }
 for await (let page of client.listKeyVersions(keyName).byPage()) {
-  for (let key of page) {
-    console.log("Version: ", key.version);
+  for (let item of page) {
+    console.log("Version: ", item.version);
   }
 }
 ```
