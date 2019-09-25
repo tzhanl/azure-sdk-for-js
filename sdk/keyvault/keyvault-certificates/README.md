@@ -291,7 +291,8 @@ Which can be used as follows:
 for await (let certificate of client.listCertificates()) {
   console.log("Certificate: ", certificate);
 }
-await client.setCertificateIssuer("IssuerName", "Provider");
+const Provider = "SSLAdmin" || "OneCert" || "DigiCert" || "GlobalSign"
+await client.setCertificateIssuer("IssuerName", Provider);
 for await (let issuer of client.listCertificateIssuers()) {
   console.log("Issuer:", issuer);
 }
