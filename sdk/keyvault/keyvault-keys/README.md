@@ -242,6 +242,10 @@ await client.recoverDeletedKey(keyName);
 // await client.purgeDeletedKey(keyName);
 ```
 
+Since the deletion of a key won't happen instantly, some time is needed
+after the `deleteKey` method is called before the deleted key is
+available to be read, recovered or purged.
+
 ### Iterating lists of keys
 
 Using the KeysClient, you can retrieve and iterate through all of the
@@ -290,10 +294,6 @@ for await (let page of client.listKeyVersions(keyName).byPage()) {
   }
 }
 ```
-
-Since the deletion of a key won't happen instantly, some time is needed
-after the `deleteKey` method is called before the deleted key is
-available to be read, recovered or purged.
 
 ## Cryptography
 
