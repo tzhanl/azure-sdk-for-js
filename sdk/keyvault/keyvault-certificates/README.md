@@ -269,6 +269,67 @@ Since the deletion of a certificate won't happen instantly, some time is needed
 after the `deleteCertificate` method is called before the deleted certificate is
 available to be read, recovered or purged.
 
+### Iterating lists of certificates
+
+Using the CertificatesClient, you can retrieve and iterate through all of the
+certificates in a Key Vault, the set of certificate issuer resources in a key vault, 
+as well as through all of the deleted certificates and the
+versions of a specific certificate. The following API methods are available:
+
+- `listCertificates` will list all of your non-deleted certificates by their names, only
+  at their latest versions.
+- `listCertificateIssuers` will list all of your non-deleted certificate isssuer resources by their names, 
+  only at their latest versions.
+- `listDeletedCertificates` will list all of your deleted certificates by their names,
+  only at their latest versions.
+- `listCertificateVersions` will list all the versions of a certificate based on a certificate
+  name.
+
+Which can be used as follows:
+
+```javascript
+for await (let certificate of client.listCertificates()) {
+  console.log("Certificate: ", certificate);
+}
+await client.setCertificateIssuer("IssuerName", "Provider");
+for await (let issuer of client.listCertificateIssuers()) {
+  console.log("Issuer:", issuer);
+}
+for await (let deletedCertificate of client.listDeletedCertificates()) {
+  console.log("Deleted Certificate: ", deletedCertificate);
+}
+for await (let item of client.listCertificateVersions(certificateName)) {
+  console.log("Version: ", item.version);
+}
+```
+
+All of these methods will return **all of the available results** at once. To
+retrieve them by pages, add `.byPage()` right after invoking the API method you
+want to use, as follows:
+
+```javascript
+for await (const page of client.listCertificates().byPage()) {
+  for (const certificate of page) {
+    console.log("Certificate:", certificate);
+  }
+}
+for await (const page of client.listCertificateIssuers().byPage()) {
+  for (const issuer of page) {
+    console.log("Issuer:", issuer);
+  }
+}
+for await (const page of client.listDeletedCertificates().byPage()) {
+  for (const deletedCertificate of page) {
+    console.log("Deleted Certificate:", deletedCertificate);
+  }
+}
+for await (let page of client.listCertificateVersions(certificateName).byPage()) {
+  for (let item of page) {
+    console.log("Version: ", item.version);
+  }
+}
+```
+
 ## Troubleshooting
 
 ### Enable logs
