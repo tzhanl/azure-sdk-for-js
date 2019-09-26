@@ -75,13 +75,13 @@ npm install @azure/storage-file@12.0.0-preview.3
 In your TypeScript or JavaScript file, import via following:
 
 ```JavaScript
-import * as Azure from "@azure/storage-file";
+import { SharedKeyCredential, FileServiceClient } from "@azure/storage-file";
 ```
 
 Or
 
 ```JavaScript
-const Azure = require("@azure/storage-file");
+const { SharedKeyCredential, FileServiceClient } = require("@azure/storage-file");
 ```
 
 ### JavaScript bundle
