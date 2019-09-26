@@ -16,7 +16,7 @@ The Azure Event Hubs client library allows you to send and receive events in you
 
 Install the Azure Event Hubs client library using npm
 
-`npm install @azure/event-hubs@next`
+`npm install @azure/event-hubs@5.0.0-preview.3`
 
 **Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a
 [Event Hubs Namespace](https://docs.microsoft.com/en-us/azure/event-hubs/) to use this package.
@@ -52,12 +52,14 @@ Interaction with Event Hubs starts with an instance of the [EventHubClient](http
 this class using one of the below
 
 ```javascript
+const { EventHubClient } = require "@azure/event-hubs";
 const client = new EventHubClient("my-connection-string", "my-event-hub");
 ```
 
 - This constructor takes the connection string of the form 'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;' and entity name to your Event Hub instance. You can get the connection string from the [Azure portal](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string#get-connection-string-from-the-portal).
 
 ```javascript
+const { EventHubClient } = require "@azure/event-hubs";
 const client = new EventHubClient("my-connection-string-with-entity-path");
 ```
 
@@ -67,6 +69,7 @@ If you have defined a shared access policy directly on the Event Hub itself, the
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
+const { EventHubClient } = require "@azure/event-hubs";
 const credential = new DefaultAzureCredential();
 const client = new EventHubClient("my-host-name", "my-event-hub", credential);
 ```
