@@ -83,13 +83,13 @@ npm install @azure/storage-blob@12.0.0-preview.3
 In your TypeScript or JavaScript file, import via following:
 
 ```JavaScript
-import * as Azure from "@azure/storage-blob";
+import { BlobServiceClient, SharedKeyCredential } from "@azure/storage-blob";
 ```
 
 Or
 
 ```JavaScript
-const Azure = require("@azure/storage-blob");
+const { BlobServiceClient, SharedKeyCredential } = require("@azure/storage-blob");
 ```
 
 ### JavaScript bundle
