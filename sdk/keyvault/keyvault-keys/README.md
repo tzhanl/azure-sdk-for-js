@@ -370,7 +370,7 @@ console.log("sign result: ", signature.result);
 `signData` will cryptographically sign a message with a signature. The following algorithms are currently supported: "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "ES256","ES256K", "ES384", and "ES512".
 
 ```javascript
-const signature = await cryptoClient.signData("RS256", Buffer.from("My Message"));
+const signature = await cryptographyClient.signData("RS256", Buffer.from("My Message"));
 console.log("sign result: ", signature);
 ```
 
